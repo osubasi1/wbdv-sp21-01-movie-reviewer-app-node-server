@@ -11,6 +11,9 @@ const findAllUser = () => {
 const findUserByUserName = (userName) => {
     return User.findOne({userName: userName});
 }
+const findUserByEmail = (email) => {
+    return User.findOne({email: email});
+}
 
 const createUser = (user) => {
     return User.create(user);
@@ -27,6 +30,6 @@ const deleteUser = (userId) => {
 const api = {
     findUserById, findAllUser,
     findUserByUserName, createUser,
-    updateUser, deleteUser
+    updateUser, deleteUser, findUserByEmail
 }
 module.exports = api;
