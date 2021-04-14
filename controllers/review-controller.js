@@ -13,9 +13,9 @@ module.exports = (app) => {
     const findAllReviewsForMovie = (req, res) => {
         const movieId = req.params['movieId']
         reviewService.findAllReviewsForMovie(movieId)
-            .then((reviews) => {
-                res.send(reviews);
-            })
+            .then((reviews) =>
+                res.send(reviews)
+            )
     }
 
     const findAllReviewsForUser = (req, res) => {
@@ -27,9 +27,10 @@ module.exports = (app) => {
     }
 
     const createReview = (req, res) => {
+
         const review = req.body;
         reviewService.createReview(review)
-            .then(async response => {
+            .then(response => {
                 res.send(response)
                   }
             )
@@ -45,17 +46,20 @@ module.exports = (app) => {
     }
 
     const deleteReview = (req, res) => {
+
         const review = req.body;
-        const reviewId = review._id;
+        const reviewId =  req.params['reviewId'];
+        console.log('body is:', review)
+        console.log('reviewId is:', reviewId)
         reviewService.deleteReview(reviewId)
             .then((response) => res.send(response))
     }
 
-    app.post('/api/review', createReview);
-    app.get('/api/review/:movieId', findAllReviewsForMovie);
-    app.get('/api/review/:userId', findAllReviewsForUser);
+    app.post('/api/reviews', createReview);
+    app.get('/api/reviews/:movieId', findAllReviewsForMovie);
+    app.get('/api/reviews/:userId', findAllReviewsForUser);
     app.get('/api/reviews', findAllRecentReviews)
-    app.put('/api/review', updateReview)
-    app.delete('/api/review/:reviewId', deleteReview)
+    app.put('/api/reviews', updateReview)
+    app.delete('/api/reviews/:reviewId', deleteReview)
 
 }

@@ -1,7 +1,7 @@
+
 module.exports = (app) => {
 
-    const commentService = require('../services/review-service');
-
+    const commentService = require('../services/comment-service');
 
     const findAllCommentsForAReview = (req, res) => {
         const reviewId = req.params['reviewId']

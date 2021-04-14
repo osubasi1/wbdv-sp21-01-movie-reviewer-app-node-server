@@ -41,6 +41,7 @@ module.exports = (app) => {
     }
 
     const createUser = (req, res) => {
+        console.log('createUser has called')
         const user = req.body;
         userService.findUserByUserName(user.userName)
             .then(async response => {
