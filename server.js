@@ -20,7 +20,7 @@ app.use(function (req,res,next){
     res.header('Access-Control-Allow-Headers',
                'Content-Type, X-Requested-With, Origin');
     res.header('Access-Control-Allow-Methods',
-               'GET, POST, PATCH, DELETE, OPTIONS');
+               'GET, POST, PATCH, DELETE, OPTIONS, PUT ');
     next();
 });
 
@@ -51,6 +51,11 @@ app.get('/api/session/get/:name', getSession);
 require('./controllers/user-controller')(app);
 require('./controllers/review-controller')(app);
 
+app.get('/hello/:name',(req,res)=>{
+    const name = req.params.name;
+    const message = "Hello " + name ;
+    res.send(message)
+})
 
 app.listen(4000, () => {
     console.log("app listening on port 4000")

@@ -22,6 +22,7 @@ module.exports = (app) => {
             })
     }
     const findUserByEmail = (req, res) => {
+        console.log('findUserByEmail')
         const email = req.params['email']
         userService.findUserByEmail(email)
             .then(response => {
@@ -40,28 +41,44 @@ module.exports = (app) => {
             })
     }
 
+    // const createUser = (req, res) => {
+    //     console.log('createUser has called')
+    //     const user = req.body;
+    //     userService.findUserByUserName(user.userName)
+    //         .then(async response => {
+    //                   if (response === null) {
+    //                       // TODO: maybe we can directly login user when they create a profile here.
+    //                       if (!(await userService.findUserByEmail(user.email))) {
+    //                           userService.createUser(user)
+    //                               .then(res.send(user))
+    //                       }
+    //                   } else {
+    //                       res.sendStatus(500) // equivalent to res.status(500).send('Internal
+    //                                           // Server Error')
+    //                   }
+    //               }
+    //         )
+    // }
     const createUser = (req, res) => {
         console.log('createUser has called')
         const user = req.body;
         userService.findUserByUserName(user.userName)
-            .then(async response => {
-                      if (response === null) {
-                          // TODO: maybe we can directly login user when they create a profile here.
-                          if (!(await userService.findUserByEmail(user.email))) {
-                              userService.createUser(user)
-                                  .then(res.send(user))
-                          }
-                      } else {
-                          res.sendStatus(500) // equivalent to res.status(500).send('Internal
-                                              // Server Error')
-                      }
-                  }
-            )
+            .then(response => {
+                if(response === null){
+                    userService.createUser(user)
+                        .then(status => {
+                        res.send(status);
+                    })
+                }
+            })
+
+
+
     }
 
     app.get('/api/users', findAllUsers);
-    app.get('/api/user/:userId', findUserById);
-    app.get('/api/user/:userName', findUserByUserName)
-    app.post('/api/user', createUser);
-    app.get('/api/user/:email', findUserByEmail);
+    app.get('/api/users/:userId', findUserById);
+    app.get('/api/users/:userName', findUserByUserName)
+    app.post('/api/users', createUser);
+    app.get('/api/users/:email', findUserByEmail);
 }

@@ -46,11 +46,7 @@ module.exports = (app) => {
     }
 
     const deleteReview = (req, res) => {
-
-        const review = req.body;
         const reviewId =  req.params['reviewId'];
-        console.log('body is:', review)
-        console.log('reviewId is:', reviewId)
         reviewService.deleteReview(reviewId)
             .then((response) => res.send(response))
     }
