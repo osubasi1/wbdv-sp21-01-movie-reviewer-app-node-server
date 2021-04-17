@@ -20,12 +20,10 @@ module.exports = (app) => {
 
     const findAllReviewsForUser = (req, res) => {
         const userId = req.params['userId']
-        console.log("in findAllReviewsForUser", userId)
         reviewService.findAllReviewsForUser(userId)
             .then(
 
             response => {
-                    console.log('all reviews uer response', response)
                     res.send({reviews: response})
             })
     }

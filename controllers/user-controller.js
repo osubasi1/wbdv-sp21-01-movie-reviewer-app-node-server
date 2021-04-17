@@ -13,10 +13,12 @@ module.exports = (app) => {
     const updateUser = (req, res) => {
             const user = req.body;
 
-            const userId = user._id
+            const userId = user.userID
             const userFName = user.firstName;
             const userLName = user.lastName;
             const userType = user.type
+            console.log('in update user')
+            console.log(userId, userFName, userLName, userType)
             userService.updateUser(userId, userFName, userLName, userType)
                 .then( (response) => res.send(response));
         }
