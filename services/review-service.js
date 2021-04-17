@@ -22,7 +22,7 @@ const updateReview = (reviewId, reviewBody, reviewTitle) => {
 }
 
 const findAllReviewsForUser = (userId) => {
-    return Review.find({userId: userId});
+    return Review.find({userID: userId});
 }
 const findReviewById = (reviewId) => {
     return Review.findById({reviewId: reviewId})

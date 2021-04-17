@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ReviewSchema = new Schema(
     {
-
+        userID: {type: String},
         review: {type: String, required: true, maxlength: 1000},
         title: {type: String, required: true, maxlength: 100},
         movieName: {type: String, maxlength: 100},

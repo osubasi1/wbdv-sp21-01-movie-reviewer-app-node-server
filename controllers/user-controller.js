@@ -17,7 +17,7 @@ module.exports = (app) => {
             const userFName = user.firstName;
             const userLName = user.lastName;
             const userType = user.type
-            userService.updateUser(userId, userFname, userLName, userType)
+            userService.updateUser(userId, userFName, userLName, userType)
                 .then( (response) => res.send(response));
         }
 

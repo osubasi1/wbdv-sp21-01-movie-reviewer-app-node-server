@@ -20,9 +20,13 @@ module.exports = (app) => {
 
     const findAllReviewsForUser = (req, res) => {
         const userId = req.params['userId']
+        console.log("in findAllReviewsForUser", userId)
         reviewService.findAllReviewsForUser(userId)
-            .then(response => {
-                    res.send(response)
+            .then(
+
+            response => {
+                    console.log('all reviews uer response', response)
+                    res.send({reviews: response})
             })
     }
 
@@ -31,7 +35,9 @@ module.exports = (app) => {
         const review = req.body;
         reviewService.createReview(review)
             .then(response => {
-                res.send(response)
+                console.log('create review response', response);
+                res.send(response);
+
                   }
             )
     }
@@ -53,7 +59,7 @@ module.exports = (app) => {
 
     app.post('/api/reviews', createReview);
     app.get('/api/reviews/:movieId', findAllReviewsForMovie);
-    app.get('/api/reviews/:userId', findAllReviewsForUser);
+    app.get('/api/reviews/user/:userId', findAllReviewsForUser);
     app.get('/api/reviews', findAllRecentReviews)
     app.put('/api/reviews', updateReview)
     app.delete('/api/reviews/:reviewId', deleteReview)
