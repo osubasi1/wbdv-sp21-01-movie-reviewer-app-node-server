@@ -10,6 +10,17 @@ module.exports = (app) => {
             })
     }
 
+    const updateUser = (req, res) => {
+            const user = req.body;
+
+            const userId = user._id
+            const userFName = user.firstName;
+            const userLName = user.lastName;
+            const userType = user.type
+            userService.updateUser(userId, userFname, userLName, userType)
+                .then( (response) => res.send(response));
+        }
+
     const findUserByUserName = (req, res) => {
         const userName = req.params['userName']
         userService.findUserByUserName(userName)
@@ -67,8 +78,12 @@ module.exports = (app) => {
                 if(response === null){
                     userService.createUser(user)
                         .then(status => {
-                        res.send(status);
+                        res.send(status._id);
                     })
+                }
+                else {
+                    console.log('response from server', response);
+                    res.send(response._id)
                 }
             })
 
@@ -81,4 +96,5 @@ module.exports = (app) => {
     app.get('/api/users/:userName', findUserByUserName)
     app.post('/api/users', createUser);
     app.get('/api/users/:email', findUserByEmail);
+    app.put('/api/users', updateUser)
 }

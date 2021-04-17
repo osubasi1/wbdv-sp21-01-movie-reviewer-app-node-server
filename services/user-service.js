@@ -19,8 +19,8 @@ const createUser = (user) => {
     return User.create(user);
 }
 
-const updateUser = (userId, user) => {
-    return User.updateOne({_id: userId}, user);
+const updateUser = (userId, firstName, lastName, type) => {
+    return User.updateOne({_id: userId}, {$set: {firstName: firstName, lastName: lastName, type: type}});
 }
 
 const deleteUser = (userId) => {
