@@ -10,7 +10,11 @@ const ReviewSchema = new Schema(
         movieId: {type: String, required: true},
         reviewer: {type: String, required: true},
         reviewerId: {type: String, required: true},
-        createdAt: {type: Date, required: true, default: Date.now()}
+        createdAt: {type: Date, required: true, default: Date.now()},
+        comment: [{
+            type: String,
+            ref: 'Comment'
+        }]
 
     }
 );

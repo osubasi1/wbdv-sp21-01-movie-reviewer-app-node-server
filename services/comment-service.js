@@ -4,8 +4,12 @@ const findAllCommentsForAReview = (reviewId) => {
     return Comment.find({reviewId: reviewId});
 }
 
+const createComment = (comment) => {
+    return Comment.create(comment);
+}
+
 const api = {
-    findAllCommentsForAReview,
+    findAllCommentsForAReview, createComment
 }
 
 module.exports = api;
