@@ -1,6 +1,7 @@
 module.exports = (app) => {
 
     const reviewService = require('../services/review-service');
+    const commentService = require('../services/comment-service')
 
     // this is async so we need to wait promise and then response
     const findAllRecentReviews = (req, res) => {
@@ -13,9 +14,15 @@ module.exports = (app) => {
     const findAllReviewsForMovie = (req, res) => {
         const movieId = req.params['movieId']
         reviewService.findAllReviewsForMovie(movieId)
-            .then((reviews) =>
+            .then( async(reviews) =>{
+                for (const review of reviews){
+                    const comment = await commentService.findAllCommentsForAReview(review._id)
+                    console.log("commment===>>", comment)
+                    review["comment"] = comment
+                }
+                console.log("my reviews", reviews)
                 res.send(reviews)
-            )
+            })
     }
 
     const findAllReviewsForUser = (req, res) => {

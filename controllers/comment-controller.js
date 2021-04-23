@@ -11,6 +11,19 @@ module.exports = (app) => {
             })
     }
 
+    const createComment = (req, res) => {
+        console.log("hereeeee====>>>")
+        const comment = req.body;
+        commentService.createComment(comment)
+            .then(response => {
+                console.log('create comment response', response);
+                res.send(response);
+
+                  }
+            )
+    }
+    app.post('/api/comments', createComment);
     app.get('/api/comment/:reviewId', findAllCommentsForAReview);
+   
 
 }
