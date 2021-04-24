@@ -52,7 +52,8 @@ module.exports = (app) => {
         const reviewId = review._id
         const reviewBody = review.review;
         const reviewTitle = review.title;
-        reviewService.updateReview(reviewId, reviewBody, reviewTitle)
+        const reviewComment = review.comment;
+        reviewService.updateReview(reviewId, reviewBody, reviewTitle, reviewComment)
             .then( (response) => res.send(response));
     }
 

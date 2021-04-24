@@ -17,8 +17,8 @@ const deleteReview = (reviewId) => {
     return Review.remove({_id: reviewId});
 }
 
-const updateReview = (reviewId, reviewBody, reviewTitle) => {
-    return Review.updateOne({_id: reviewId}, {$set: {review: reviewBody, title: reviewTitle}});
+const updateReview = (reviewId, reviewBody, reviewTitle, reviewComment) => {
+    return Review.updateOne({_id: reviewId}, {$set: {review: reviewBody, title: reviewTitle, comment: reviewComment}});
 }
 
 const findAllReviewsForUser = (userId) => {
