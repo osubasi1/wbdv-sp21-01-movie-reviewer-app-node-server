@@ -28,11 +28,16 @@ module.exports = (app) => {
     const findAllReviewsForUser = (req, res) => {
         const userId = req.params['userId']
         reviewService.findAllReviewsForUser(userId)
-            .then(
+            .then( async(reviews) =>{
+                            for (const review of reviews){
+                                const comment = await commentService.findAllCommentsForAReview(review._id)
+                                console.log("commment===>>", comment)
+                                review["comment"] = comment
+                            }
+                            console.log("my reviews", reviews)
+                            res.send({reviews: reviews})
+                        })
 
-            response => {
-                    res.send({reviews: response})
-            })
     }
 
     const createReview = (req, res) => {
