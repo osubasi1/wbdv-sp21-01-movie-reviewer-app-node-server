@@ -17,8 +17,6 @@ module.exports = (app) => {
             const userFName = user.firstName;
             const userLName = user.lastName;
             const userType = user.type
-            console.log('in update user')
-            console.log(userId, userFName, userLName, userType)
             userService.updateUser(userId, userFName, userLName, userType)
                 .then( (response) => res.send(response));
         }
@@ -54,26 +52,7 @@ module.exports = (app) => {
             })
     }
 
-    // const createUser = (req, res) => {
-    //     console.log('createUser has called')
-    //     const user = req.body;
-    //     userService.findUserByUserName(user.userName)
-    //         .then(async response => {
-    //                   if (response === null) {
-    //                       // TODO: maybe we can directly login user when they create a profile here.
-    //                       if (!(await userService.findUserByEmail(user.email))) {
-    //                           userService.createUser(user)
-    //                               .then(res.send(user))
-    //                       }
-    //                   } else {
-    //                       res.sendStatus(500) // equivalent to res.status(500).send('Internal
-    //                                           // Server Error')
-    //                   }
-    //               }
-    //         )
-    // }
     const createUser = (req, res) => {
-        console.log('createUser has called')
         const user = req.body;
         userService.findUserByUserName(user.userName)
             .then(response => {
@@ -84,7 +63,6 @@ module.exports = (app) => {
                     })
                 }
                 else {
-                    console.log('response from server', response);
                     res.send(response._id)
                 }
             })
