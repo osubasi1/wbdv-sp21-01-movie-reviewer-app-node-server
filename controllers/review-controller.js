@@ -17,10 +17,8 @@ module.exports = (app) => {
             .then( async(reviews) =>{
                 for (const review of reviews){
                     const comment = await commentService.findAllCommentsForAReview(review._id)
-                    // console.log("commment===>>", comment)
                     review["comment"] = comment
                 }
-                // console.log("my reviews", reviews)
                 res.send(reviews)
             })
     }
@@ -31,10 +29,8 @@ module.exports = (app) => {
             .then( async(reviews) =>{
                             for (const review of reviews){
                                 const comment = await commentService.findAllCommentsForAReview(review._id)
-                                // console.log("commment===>>", comment)
                                 review["comment"] = comment
                             }
-                            // console.log("my reviews", reviews)
                             res.send({reviews: reviews})
                         })
 
@@ -45,7 +41,6 @@ module.exports = (app) => {
         const review = req.body;
         reviewService.createReview(review)
             .then(response => {
-                // console.log('create review response', response);
                 res.send(response);
 
                   }

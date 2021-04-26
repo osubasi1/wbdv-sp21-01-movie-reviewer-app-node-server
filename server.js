@@ -53,11 +53,6 @@ require('./controllers/review-controller')(app);
 require('./controllers/comment-controller')(app);
 require('./controllers/follower-controller')(app)
 
-app.get('/hello/:name',(req,res)=>{
-    const name = req.params.name;
-    const message = "Hello " + name ;
-    res.send(message)
-})
 
 app.listen(4000, () => {
     console.log("app listening on port 4000")
